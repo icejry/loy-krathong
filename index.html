@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#18392f" />
+  <meta name="description" content="ลอยกระทงริมสายน้ำ — ออกแบบกระทงและส่งคำอธิษฐานในคืนพระจันทร์เต็มดวง" />
+  <title>ลอยกระทงริมสายน้ำ | คืนเพ็ญแห่งความปรารถนา</title>
+  <link rel="icon" href="assets/lotus.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/enhance.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ลอยกระทงริมสายน้ำ | คืนเพ็ญแห่งความปรารถนา" />
+  <meta property="og:description" content="ออกแบบกระทง เขียนคำอธิษฐาน แล้วปล่อยลงสายน้ำใต้แสงจันทร์" />
+</head>
+<body>
+<div class="site-shell" id="app">
+  <header class="site-header">
+    <a class="brand" href="#river" aria-label="หน้าแรก ลอยกระทงริมสายน้ำ">
+      <span class="brand-crest" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 8c-9 8-10 15-8 21 2 5 5 8 8 10 3-2 6-5 8-10 2-6 1-13-8-21Z"/><path d="M13 19C6 19 4 24 6 29c2 6 8 10 18 12-6-7-8-14-11-22ZM35 19c7 0 9 5 7 10-2 6-8 10-18 12 6-7 8-14 11-22Z"/></svg></span>
+      <span class="brand-name">ลอยกระทง<span class="brand-sub">ริมสายน้ำ</span></span>
+    </a>
+    <nav class="main-nav" aria-label="เมนูหลัก">
+      <a href="#river" class="nav-link active" data-page-link="river" aria-current="page">ลอยกระทง</a>
+      <a href="#story" class="nav-link" data-page-link="story">เรื่องราว</a>
+      <input type="range" class="vol" id="vol" min="0" max="100" value="58" aria-label="ระดับเสียงเพลง" />
+      <button type="button" class="tool-btn" id="sound-toggle" aria-pressed="true" aria-label="ปิดเสียงเพลง"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z"/><path class="on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="off" d="m16 9.5 5 5m0-5-5 5"/></svg></button>
+    </nav>
+  </header>
+
+  <main id="river-page" class="river-layout">
+    <section class="river-stage" id="river-stage" aria-label="แม่น้ำลอยกระทงในคืนพระจันทร์เต็มดวง">
+      <canvas id="river-canvas" aria-hidden="true"></canvas>
+      <div class="scene-vignette" aria-hidden="true"></div>
+      <div class="scene-intro">
+        <div class="scene-eyebrow">ค่ำคืนแห่งแสงเทียน <span>•</span> เดือนสิบสอง</div>
+        <h1>ฝากความหวัง<br />ไว้กับสายน้ำ</h1>
+        <p>แต่งกระทงด้วยมือคุณ แล้วปล่อยความปรารถนาไปใต้แสงจันทร์</p>
+        <div class="festival-pill" id="festival-pill" hidden></div>
+      </div>
+      <div class="river-boats" id="river-boats"></div>
+      <div class="hero-boat" id="hero-boat" aria-label="ตัวอย่างกระทงที่กำลังตกแต่ง" role="img"><div class="hero-art" id="hero-art"></div></div>
+      <div class="launch-veil" id="launch-veil" aria-hidden="true"></div>
+      <div class="scene-watermark">คืนเพ็ญ • แสงเทียน • สายน้ำ</div>
+      <div class="scene-footnote"><span id="river-summary">กระทงในสายน้ำ <strong>0</strong> ใบ</span><span>แตะกระทงเพื่ออ่านคำอธิษฐาน • แตะท้องฟ้าเพื่อปล่อยโคม</span></div>
+      <div class="wish-sheet" id="wish-sheet" role="dialog" aria-modal="false" aria-labelledby="wish-sheet-heading" hidden>
+        <div class="wish-sheet-top"><span id="wish-sheet-heading">คำอธิษฐาน</span><button type="button" class="icon-close" id="close-wish" aria-label="ปิดคำอธิษฐาน"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg></button></div>
+        <p class="wish-sheet-text" id="wish-sheet-text"></p>
+        <small class="wish-sheet-caption" id="wish-sheet-caption"></small>
+      </div>
+      <div class="launch-message" id="launch-message" role="status" aria-live="polite" hidden>แสงเทียนของคุณเริ่มออกเดินทางแล้ว</div>
+    </section>
+
+    <aside class="atelier" aria-labelledby="atelier-heading">
+      <div class="atelier-top"><span class="eyebrow">กระทงของฉัน</span><span class="atelier-index">01 / 02</span></div>
+      <h2 id="atelier-heading">ประดิษฐ์กระทง</h2>
+      <p class="atelier-description">เลือกทีละรายละเอียด ให้กระทงใบนี้มีเรื่องราวของคุณเอง</p>
+      <div class="atelier-tabs" id="atelier-tabs" role="tablist" aria-label="ส่วนประกอบกระทง">
+        <button type="button" role="tab" data-category="base" aria-selected="true">ฐาน</button>
+        <button type="button" role="tab" data-category="flower" aria-selected="false">ดอกไม้</button>
+        <button type="button" role="tab" data-category="trim" aria-selected="false">สีขอบ</button>
+        <button type="button" role="tab" data-category="light" aria-selected="false">เทียน</button>
+        <button type="button" role="tab" data-category="decoration" aria-selected="false">ประดับ</button>
+      </div>
+      <div class="choice-heading"><h3 id="choice-heading">เลือกรูปทรงกระทง</h3><span id="choice-counter">6 แบบ</span></div>
+      <div class="choices" id="choices" role="group" aria-labelledby="choice-heading"></div>
+      <div class="atelier-tools">
+        <button type="button" class="ghost-btn" id="random-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="15" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/><circle cx="9" cy="15" r="1" fill="currentColor"/></svg>สุ่มกระทง</button>
+        <button type="button" class="ghost-btn" id="save-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14"/></svg>บันทึกเป็นการ์ด</button>
+        <button type="button" class="ghost-btn" id="gallery-btn">กระทงของฉัน</button>
+        <button type="button" class="ghost-btn" id="yipeng-btn" aria-pressed="false">โหมดยี่เป็ง</button>
+      </div>
+      <div class="density-control" id="density-control" hidden>
+        <label for="density-slider">ความแน่นของดอกไม้</label>
+        <div class="density-buttons" id="density-buttons" role="group" aria-label="ปริมาณดอกไม้">
+          <button type="button" data-density="6">น้อย</button>
+          <button type="button" data-density="9" class="chosen">พอดี</button>
+          <button type="button" data-density="13">แน่น</button>
+        </div>
+      </div>
+      <div class="atelier-divider"></div>
+      <form class="wish-form" id="wish-form">
+        <label for="wish-input">เขียนคำอธิษฐานของคุณ</label>
+        <div class="wish-chips" id="wish-chips" aria-label="คำอธิษฐานแนะนำ"></div>
+        <textarea id="wish-input" rows="2" maxlength="120" placeholder="ขอให้ทุกวันมีเรื่องดี ๆ เข้ามา…"></textarea>
+        <input id="wish-name" class="wish-name" type="text" maxlength="24" placeholder="ชื่อของคุณ (ไม่บังคับ) จะแสดงต่อท้ายคำอธิษฐาน" autocomplete="nickname" aria-label="ชื่อของคุณ" />
+        <div class="form-bottom"><span>ปล่อยแล้ว กระทงจะยังลอยอยู่ในแม่น้ำ</span><span id="wish-length">0/120</span></div>
+        <button type="submit" class="launch-button" id="launch-button"><span>ปล่อยกระทงลงสายน้ำ</span><span class="launch-seal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 8c-9 8-10 15-8 21 2 5 5 8 8 10 3-2 6-5 8-10 2-6 1-13-8-21Z"/><path d="M13 19C6 19 4 24 6 29c2 6 8 10 18 12-6-7-8-14-11-22ZM35 19c7 0 9 5 7 10-2 6-8 10-18 12 6-7 8-14 11-22Z"/></svg></span></button>
+        <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+      </form>
+      <footer class="atelier-footer"><span class="footer-line"></span> แสงจันทร์จะนำทางให้ความปรารถนา</footer>
+    </aside>
+  </main>
+
+  <main id="story-page" class="story-page" hidden>
+    <section class="story-hero">
+      <span class="story-tag">วัฒนธรรมและสายน้ำ</span>
+      <h1>เรื่องเล่า<br /><em>ในคืนเดือนเพ็ญ</em></h1>
+      <p>ประเพณีลอยกระทงไม่ใช่เพียงแสงเทียนกลางน้ำ แต่คือเรื่องราวของความเชื่อ งานหัตถกรรม และความเคารพต่อธรรมชาติ</p>
+      <div class="story-moon" aria-hidden="true"></div>
+    </section>
+    <section class="story-content">
+      <div class="story-lead"><span>เรื่องราว 01 — 06</span><h2>ประเพณีที่เดินทางมากับกาลเวลา</h2><p>คืนขึ้น 15 ค่ำ เดือน 12 เป็นช่วงเวลาที่ชาวไทยจำนวนมากร่วมกันประดิษฐ์กระทง จุดแสงเทียน และอธิษฐานขณะลอยกระทงลงสายน้ำ</p></div>
+      <div class="chapters">
+        <article class="chapter"><span>01 / วันเวลา</span><h3>คืนเพ็ญเดือนสิบสอง</h3><p>วันลอยกระทงตรงกับวันขึ้น 15 ค่ำ เดือน 12 ตามปฏิทินจันทรคติไทย โดยมักอยู่ในเดือนพฤศจิกายน ช่วงเทศกาลมีการประดิษฐ์กระทง การละเล่น และงานประเพณีหลากหลายรูปแบบตามท้องถิ่น</p></article>
+        <article class="chapter"><span>02 / ความหมาย</span><h3>ความเคารพต่อสายน้ำ</h3><p>ความเชื่อหนึ่งที่แพร่หลายคือการขอขมาต่อพระแม่คงคาและแสดงความขอบคุณต่อสายน้ำ บางท้องถิ่นยังเชื่อมโยงประเพณีกับคติพุทธศาสนา รวมถึงการอธิษฐานและปล่อยสิ่งไม่ดีให้ผ่านพ้นไป</p></article>
+        <article class="chapter"><span>03 / ตำนาน</span><h3>เรื่องเล่าของนางนพมาศ</h3><p>ตำนานที่รู้จักกันกล่าวถึงนางนพมาศและกระทงรูปดอกบัวในสมัยสุโขทัย อย่างไรก็ตาม ยังไม่มีหลักฐานที่ชัดเจนพอยืนยันว่าประเพณีมีต้นกำเนิดจากเหตุการณ์ดังกล่าว วรรณกรรมเรื่องนางนพมาศมีความสัมพันธ์กับงานเขียนในสมัยรัตนโกสินทร์ตอนต้น</p></article>
+        <article class="chapter"><span>04 / ภูมิปัญญา</span><h3>ศิลปะจากใบตองและดอกไม้</h3><p>การพับใบตอง ประดิษฐ์ฐานจากหยวกกล้วย และการจัดดอกไม้สดสะท้อนฝีมือหัตถกรรมของไทย ลวดลายและวัสดุแตกต่างไปตามชุมชน ความงดงามไม่ได้อยู่แค่กระทง แต่ยังอยู่ในเวลาที่ผู้คนทำร่วมกัน</p></article>
+        <article class="chapter"><span>05 / ชุมชน</span><h3>ประเพณีหลากหลายถิ่น</h3><p>ในภาคเหนือมีประเพณียี่เป็ง จังหวัดตากมีลอยกระทงสาย และจังหวัดสุโขทัยมีงานเผาเทียนเล่นไฟ แต่ละพื้นที่ผสมผสานความเชื่อ ศิลปะ การแสดง และภูมิทัศน์ของตนเป็นเอกลักษณ์</p></article>
+        <article class="chapter"><span>06 / วันพรุ่งนี้</span><h3>รักษ์ประเพณี รักษ์แม่น้ำ</h3><p>การลดขยะจากกระทง เลี่ยงโฟมและพลาสติก และเลือกใช้วัสดุอย่างรับผิดชอบเป็นส่วนสำคัญในการสืบสานประเพณี การลอยกระทงออนไลน์ยังเป็นทางเลือกที่ช่วยส่งต่อความหมายโดยไม่เพิ่มขยะลงแหล่งน้ำ</p></article>
+      </div>
+      <div class="story-sources">ข้อมูลประกอบจาก <a href="https://thailandfoundation.mfa.go.th/en/content/52600-loy-kratong-festival?cate=5f206dc128600c531517cb77" target="_blank" rel="noopener noreferrer">Thailand Foundation</a> และ <a href="https://museum.socanth.tu.ac.th/en/general-en/loy_kratong_festival-en/" target="_blank" rel="noopener noreferrer">พิพิธภัณฑ์ธรรมศาสตร์</a></div>
+      <a href="#river" class="story-return">กลับไปลอยกระทง <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+</div>
+<script src="js/config.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
