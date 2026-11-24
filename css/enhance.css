@@ -1,0 +1,99 @@
+/* Enhancements: responsive polish for every device + styles for the new features. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+button,.river-stage{touch-action:manipulation}
+:focus-visible{outline:2px solid #e0b25f;outline-offset:2px}
+
+/* Notches and rounded corners */
+.site-shell{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+.site-header{padding-top:max(12px,env(safe-area-inset-top))}
+.atelier{padding-bottom:max(24px,calc(env(safe-area-inset-bottom) + 12px))}
+
+/* Header sound button */
+.main-nav{align-items:center}
+.tool-btn{width:40px;height:40px;border-radius:50%;border:1px solid #d3b88c80;background:transparent;color:#f2e5c6;display:grid;place-items:center;cursor:pointer;padding:0;margin-left:6px;transition:background .2s}
+.tool-btn:hover{background:#ffffff18}
+.tool-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tool-btn .off{display:none}
+.tool-btn[aria-pressed="false"] .on{display:none}
+.tool-btn[aria-pressed="false"] .off{display:block}
+
+/* Festival countdown */
+.festival-pill{display:inline-block;margin-top:14px;padding:7px 14px;border:1px solid #e8cf9b66;border-radius:999px;background:#0a203099;color:#f6e4bb;font-size:13px;line-height:1.5;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+
+/* Atelier tools + wish chips */
+.atelier-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ghost-btn{flex:1 1 140px;min-height:42px;padding:0 12px;border:1px solid #b9a98a;border-radius:10px;background:#fbf5e8;color:#244636;font:inherit;font-size:14px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:background .2s}
+.ghost-btn:hover{background:#efe4cb}
+.ghost-btn:disabled{opacity:.6;cursor:progress}
+.ghost-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.wish-chips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;margin-bottom:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.wish-chips::-webkit-scrollbar{display:none}
+.wish-chips button{flex:none;border:1px solid #c9b894;background:#fbf5e8;color:#2d4b3b;border-radius:999px;padding:6px 12px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
+.wish-chips button:hover{background:#efe4cb}
+
+/* Desktop: the editing panel scrolls instead of clipping */
+@media(min-width:851px){.atelier{overflow-y:auto;scrollbar-width:thin;scrollbar-color:#b9a98a transparent}}
+
+/* Very large screens */
+@media(min-width:1900px){.site-shell{max-width:1840px}.river-layout{height:min(980px,calc(100svh - 90px))}.scene-intro h1{font-size:clamp(42px,3vw,58px)}}
+
+/* Phones in landscape and short windows */
+@media(max-height:520px) and (orientation:landscape){
+ .site-header{min-height:54px;padding-top:max(6px,env(safe-area-inset-top));padding-bottom:6px}
+ .river-stage{height:calc(100dvh - 54px);min-height:290px}
+ .scene-intro{top:14px}.scene-intro h1{font-size:24px;line-height:1.4}.scene-intro p,.festival-pill{display:none}
+ .hero-boat{width:min(30%,210px);top:80%}
+ .atelier{min-height:0}
+}
+
+/* Small phones */
+@media(max-width:380px){
+ .brand-sub{display:none}.main-nav{gap:8px}.tool-btn{width:36px;height:36px;margin-left:2px}
+ .atelier-tabs button{font-size:11px}.festival-pill{font-size:11.5px;padding:6px 11px}
+}
+@media(max-width:560px){.scene-footnote span:last-child{max-width:190px}.ghost-btn{flex-basis:calc(50% - 4px)}}
+
+/* Touch devices: comfortable targets */
+@media(pointer:coarse){.choice,.density-buttons button,.icon-close,.wish-chips button{min-height:44px}.nav-link{min-height:44px;display:inline-flex;align-items:center}}
+
+@media(prefers-reduced-motion:reduce){.tool-btn,.ghost-btn{transition:none}}
+
+/* Round 2 */
+#fx-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+#river-canvas{transition:transform .25s ease-out;will-change:transform}
+.vol{width:84px;accent-color:#d3b88c;margin-left:8px}
+@media(max-width:850px){.vol{display:none}}
+.ghost-btn[aria-pressed="true"]{background:#193e31;color:#f2e5c6;border-color:#193e31}
+.wish-name{width:100%;margin-top:8px;min-height:42px;padding:0 12px;border:1px solid #b9a98a;border-radius:10px;background:#fbf5e8;color:#244636;font:inherit;font-size:14px}
+.ritual{position:absolute;inset:0;z-index:30;display:grid;place-content:center;justify-items:center;gap:14px;text-align:center;background:#06121cd9;color:#f6e4bb;padding:24px}
+.ritual p{margin:0;font-size:16px;min-height:1.6em}
+.ritual .ghost-btn{flex:none;min-width:230px}
+.ritual .skip{background:transparent;color:#d8c79f;border-color:#d8c79f55;min-width:0}
+.ritual .flame{width:18px;height:34px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:#ffd98a;opacity:.2;transition:opacity .5s,box-shadow .5s}
+.ritual:not([data-step="0"]) .flame{opacity:1;box-shadow:0 0 34px 14px #ffb44e88}
+#gallery{width:min(560px,calc(100vw - 24px));max-height:min(80dvh,720px);border:0;border-radius:14px;padding:0;background:#f4ecdb;color:#1e3d32;box-shadow:0 20px 70px #0008}
+#gallery::backdrop{background:#06121ca8}
+.gal-top{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid #d6c8a6;position:sticky;top:0;background:#f4ecdb}
+.gal-top h2{margin:0;font-size:20px}.gal-top .icon-close{color:#1e3d32}.gal-top svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
+.gal-list{padding:14px 18px 18px;display:grid;gap:12px}.gal-empty{margin:20px 0;text-align:center}
+.gal-item{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px solid #e2d6b8}
+.gal-art svg{width:100%;height:auto;display:block}.gal-body p{margin:0 0 4px;font-size:15px;overflow-wrap:anywhere}.gal-body small{color:#5b705f}
+.gal-act{display:flex;gap:6px;margin-top:8px}.gal-act .ghost-btn{flex:1 1 auto;min-height:38px;font-size:13px}
+.regions{margin:34px 0}.regions h3{margin:0 0 4px;font-size:22px}.regions p{margin:0 0 14px;font-size:14px}
+.region-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.regcard{text-align:left;padding:16px;border:1px solid #b9a98a;border-radius:12px;background:#fbf5e8;color:#1e3d32;font:inherit;cursor:pointer;display:grid;gap:4px}
+.regcard strong{font-size:18px}.regcard span{font-size:13px;color:#5b705f}.regcard em{font-style:normal;font-size:14px;display:none;margin-top:6px}
+.regcard[aria-expanded="true"]{background:#193e31;color:#f2e5c6}.regcard[aria-expanded="true"] span{color:#d8c79f}.regcard[aria-expanded="true"] em{display:block}
+@media(max-width:560px){.gal-item{grid-template-columns:84px 1fr}}
+@media(prefers-reduced-motion:reduce){#river-canvas{transition:none}}
+
+/* Round 3: fix overlap + atmosphere */
+.atelier>*{flex-shrink:0}
+.mist{position:absolute;left:-25%;right:-25%;top:49%;height:17%;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 28% 50%,#cfe6e033,transparent 62%),radial-gradient(ellipse at 76% 50%,#cfe6e026,transparent 58%);animation:mistDrift 42s ease-in-out infinite alternate}
+@keyframes mistDrift{to{transform:translateX(14%)}}
+.scene-intro{animation:introIn 1.5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes introIn{from{opacity:0;transform:translateY(14px)}}
+.hero-boat::after{content:"";position:absolute;left:22%;right:22%;bottom:4%;height:24%;background:radial-gradient(ellipse,#ffb44e47,transparent 70%);filter:blur(12px);animation:glowPulse 3.6s ease-in-out infinite;pointer-events:none;z-index:-1}
+@keyframes glowPulse{50%{opacity:.5;transform:scale(1.1)}}
+@media(prefers-reduced-motion:reduce){.mist,.scene-intro,.hero-boat::after{animation:none!important}}
